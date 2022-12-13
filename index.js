@@ -39,11 +39,12 @@ app.post('/login', async (req, res) => {
     const data = req.body;
     const username = data.username;
     const password = data.password;
-    const checker = await Account.findOne({ username: username }).select("-password");
+    const checker = await Account.findOne({ username: username });
+    const checker10 = await Account.findOne({ username: username }).select("-password");
     if (username && password !== '') {
         if (checker) {
             if ((checker.password) === (password)) {
-                res.json(checker)
+                res.json(checker10)
             } else {
                 res.json({ error: 'incorrect password. please try again.' })
             }
